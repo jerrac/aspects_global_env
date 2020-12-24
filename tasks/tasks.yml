@@ -1,0 +1,21 @@
+- name: "Template a file in /etc/profile.d"
+  when: item.value.enabled
+  template:
+    dest: "{{ item.value.dest }}"
+    src: basic.sh.j2
+    mode: "{{ item.value.mode | default(0644) }}"
+    owner: "{{ item.value.owner | default('root') }}"
+    group: "{{ item.value.group | default('root') }}"
+  loop: "{{ aspects_global_env_blocks | default({}) | dict2items }}"
+  tags:
+  - aspects_global_env
+
+- name: "Add lines to /etc/bash.bashrc"
+  when: item.value.enabled
+  lineinfile:
+    state: "{{ item.value.state }}"
+    line: "{{ item.value.line }}"
+    path: "/etc/bash.bashrc"
+  loop: "{{ aspects_global_env_lines | default({}) | dict2items }}"
+  tags:
+  - aspects_global_env

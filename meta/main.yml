@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  author: David Reagan
+  description: Add environment files to `/etc/profile.d/` or add lines to /etc/bash.bashrc.
+  license: MIT
+  min_ansible_version: 2.8
+  platforms:
+  - name: CentOS
+    version:
+    - 7
+  - name: Ubuntu
+    versions:
+    - xenial
+    - bionic
+    - focal
+  - name: Debian
+    versions:
+    - stretch
+  - name: OracleLinux
+    versions:
+    - 7
+  categories:
+  - system
+dependencies: {}
