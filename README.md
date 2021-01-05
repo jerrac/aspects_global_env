@@ -1,6 +1,6 @@
 # aspects_global_env
 
-Add environment files to `/etc/profile.d/` or add lines to /etc/bash.bashrc.
+Add environment files to `/etc/profile.d/` or add lines to `/etc/profile`.
 
 # Requirements
 

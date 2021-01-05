@@ -6,16 +6,16 @@
     mode: "{{ item.value.mode | default(0644) }}"
     owner: "{{ item.value.owner | default('root') }}"
     group: "{{ item.value.group | default('root') }}"
-  loop: "{{ aspects_global_env_blocks | default({}) | dict2items }}"
+  loop: "{{ aspects_global_env_blocks | default({}) | dictsort(true,'key') | dict2items }}"
   tags:
   - aspects_global_env
 
-- name: "Add lines to /etc/bash.bashrc"
+- name: "Add lines to /etc/profile"
   when: item.value.enabled
   lineinfile:
     state: "{{ item.value.state }}"
     line: "{{ item.value.line }}"
-    path: "/etc/bash.bashrc"
-  loop: "{{ aspects_global_env_lines | default({}) | dict2items }}"
+    path: "/etc/profile"
+  loop: "{{ aspects_global_env_lines | default({}) | dictsort(true,'key') | dict2items }}"
   tags:
   - aspects_global_env
