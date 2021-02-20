@@ -14,12 +14,13 @@
 
 - name: "Add lines to /etc/profile"
   when:
-    - item[1].enabled is defined
-    - item[1].enabled
+    - item.value.enabled is defined
+    - item.value.enabled
   lineinfile:
-    state: "{{ item[1].state }}"
-    line: "{{ item[1].line }}"
+    regexp: "^.*export {{ item.key }}=.*"
+    state: "{{ item.value.state }}"
+    line: "{{ item.value.line }}"
     path: "/etc/profile"
-  loop: "{{ aspects_global_env_lines | default({}) | dictsort(true,'key') }}"
+  loop: "{{ aspects_global_env_lines | default({}) | dict2items }}"
   tags:
   - aspects_global_env
