@@ -18,9 +18,9 @@
     - item.value.enabled
   lineinfile:
     regexp: "^.*export {{ item.key }}=.*"
-    state: "{{ item.value.state }}"
-    line: "{{ item.value.line }}"
+    state: "{{ item.1.state }}"
+    line: "{{ item.1.line }}"
     path: "/etc/profile"
-  loop: "{{ aspects_global_env_lines | default({}) | dict2items }}"
+  loop: "{{ aspects_global_env_lines | default({}) | dictsort(true,'key') }}"
   tags:
   - aspects_global_env
